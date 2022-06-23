@@ -1,0 +1,16 @@
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\TaskManager.exe
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\TaskManager.deps.json
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\TaskManager.runtimeconfig.json
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\TaskManager.runtimeconfig.dev.json
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\TaskManager.dll
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\ref\TaskManager.dll
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\bin\Debug\net5.0\TaskManager.pdb
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.csproj.AssemblyReference.cache
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.AssemblyInfoInputs.cache
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.AssemblyInfo.cs
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.csproj.CoreCompileInputs.cache
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.dll
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\ref\TaskManager.dll
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.pdb
+C:\Users\Egor\RiderProjects\TaskManager\TaskManager\obj\Debug\net5.0\TaskManager.genruntimeconfig.cache
