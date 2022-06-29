@@ -6,9 +6,10 @@ namespace TaskManager
     public class Task
     {
         private readonly int _id;
+        public int Id => _id;
         private readonly string _information;
         private bool _isCompleted = false;
-        private DateTime _deadline;
+        private DateTime _deadline = DateTime.MaxValue;
         private List<SubTask> _subTasks = new List<SubTask>();
 
         public Task(int id, string information)
@@ -34,7 +35,8 @@ namespace TaskManager
 
         public void Print()
         {
-            Console.WriteLine($"[ ] ({_deadline:dd.MM.yyyy}) {{{_id}}} {_information}");
+            var checkbox = _isCompleted ? "[x]" : "[ ]";
+            Console.WriteLine($"{checkbox} ({_deadline:dd.MM.yyyy}) {{{_id}}} {_information}");
             foreach (var subTask in _subTasks)
             {
                 Console.WriteLine($"\t[ ] {{{subTask.Id}}} {subTask.Info}");
