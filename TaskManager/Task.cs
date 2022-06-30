@@ -5,41 +5,27 @@ namespace TaskManager
 {
     public class Task
     {
-        private readonly int _id;
-        public int Id => _id;
-        private readonly string _information;
-        private bool _isCompleted = false;
-        private DateTime _deadline = DateTime.MaxValue;
-        public List<Subtask> subtasks = new List<Subtask>();
+        public int Id { get; }
+        public string Description { get; }
+        public bool IsCompleted { get; set; }
+        public DateTime Deadline { get; set; }
+        public List<Subtask> Subtasks { get; set; }
 
-        public Task(int id, string information)
+        public Task(int id, string description)
         {
-            this._id = id;
-            this._information = information;
-        }
-
-        public void MarkCompleted()
-        {
-            _isCompleted = true;
-        }
-
-        public void AddDeadline(DateTime deadline)
-        {
-            _deadline = deadline;
-        }
-
-        public void AddSubtask(int id, string information)
-        {
-            subtasks.Add(new  Subtask(id, information));
+            Id = id;
+            Description = description;
+            Subtasks = new List<Subtask>();
+            Deadline = DateTime.MaxValue;
         }
 
         public void Print()
         {
-            var checkbox = _isCompleted ? "[x]" : "[ ]";
-            Console.WriteLine($"{checkbox} ({_deadline:dd.MM.yyyy}) {{{_id}}} {_information}");
-            foreach (var subTask in subtasks)
+            var checkbox = IsCompleted ? "[x]" : "[ ]";
+            Console.WriteLine($"{checkbox} ({Deadline:dd.MM.yyyy}) {{{Id}}} {Description}");
+            foreach (var subTask in Subtasks)
             {
-                Console.WriteLine($"\t[ ] {{{subTask.Id}}} {subTask.Info}");
+                Console.WriteLine($"\t[ ] {{{subTask.Id}}} {subTask.Description}");
             }
         }
     }

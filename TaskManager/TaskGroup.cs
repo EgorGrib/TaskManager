@@ -5,37 +5,37 @@ namespace TaskManager
 {
     public class TaskGroup
     {
-        private readonly int _id;
-        public int Id => _id;
-        private readonly string _title;
-        private List<Task> _tasks = new List<Task>();
+        public int Id { get; }
+        public string Title { get; }
+        public List<Task> Tasks { get; set; }
 
         public TaskGroup(int id, string title)
         {
-            _id = id;
-            _title = title;
+            Id = id;
+            Title = title;
+            Tasks = new List<Task>();
         }
-
+/*
         public void AddToGroup(Task task)
         {
-            _tasks.Add(task);
+            Tasks.Add(task);
         }
 
         public void DeleteFromGroup(int id)
         {
-            for (int i = 0; i < _tasks.Count; i++)
+            for (int i = 0; i < Tasks.Count; i++)
             {
-                if (_tasks[i].Id == id)
+                if (Tasks[i].Id == id)
                 {
-                    _tasks.RemoveAt(i);
+                    Tasks.RemoveAt(i);
                 }
             }
-        }
+        }*/
 
         public void Print()
         {
-            Console.WriteLine("Group: " + _title);
-            foreach (var t in _tasks)
+            Console.WriteLine("Group: " + Title);
+            foreach (var t in Tasks)
             {
                 t.Print();
             }

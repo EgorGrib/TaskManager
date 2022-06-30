@@ -2,22 +2,14 @@ namespace TaskManager
 {
     public class Subtask
     {
-        private int _id;
-        private string _information;
-        private bool _isCompleted = false;
+        public int Id { get; }
+        public string Description { get; }
+        public bool IsCompleted { get; set; }
 
-        public int Id => _id;
-        public string Info => _information;
-
-        public Subtask(int id, string information)
+        public Subtask(int id, string description)
         {
-            _id = id;
-            _information = information;
-        }
-        
-        public void MarkCompleted()
-        {
-            _isCompleted = true;
+            Id = id;
+            Description = description;
         }
     }
 }

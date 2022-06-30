@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace TaskManager
 {
     public class Commander
     {
-        private List<Task> _tasks = new List<Task>();
-        private List<TaskGroup> _groups = new List<TaskGroup>();
+        private List<Task> _tasks;
+        private List<TaskGroup> _groups;
         private int _id;
         private int _groupId;
 
@@ -15,6 +17,8 @@ namespace TaskManager
         {
             _id = 1;
             _groupId = 1;
+            _tasks = new List<Task>();
+            _groups = new List<TaskGroup>();
         }
 
         public void AddTask(string taskTitle)
@@ -27,7 +31,8 @@ namespace TaskManager
         public void AddSubtask(int id, string subtaskTitle)
         {
             Task task = _tasks.First(x => x.Id == id);
-            task.AddSubtask(_id, subtaskTitle);
+            Subtask subtask = new Subtask(_id, subtaskTitle);
+            task.Subtasks.Add(subtask);
             _id++;
         }
 
@@ -38,13 +43,12 @@ namespace TaskManager
 
         public void CompleteTask(int id)
         {
-            _tasks.First(x => x.Id == id).MarkCompleted();
+            _tasks.First(x => x.Id == id).IsCompleted = true;
         }
 
         public void CompleteSubtask(int id)
         {
-            Subtask subtask = _tasks.Select(x => x.subtasks.First(x => x.Id == id)).First();
-            subtask.MarkCompleted();
+            _tasks.Select(x => x.Subtasks.First(y => y.Id == id)).First().IsCompleted = true;
         }
 
         public void CreateGroup(string title)
@@ -60,25 +64,31 @@ namespace TaskManager
 
         public void AddToGroup(int groupId, int id)
         {
-            _groups.First(x => x.Id == groupId).AddToGroup(_tasks.First(x => x.Id == id));
+            _groups.First(x => x.Id == groupId).Tasks.Add(_tasks.First(x => x.Id == id));
         }
 
         public void DeleteFromGroup(int groupId, int id)
         {
-            _groups.First(x => x.Id == groupId).DeleteFromGroup(id);
+            _groups.First(x => x.Id == groupId).Tasks.Remove(_tasks.First(x => x.Id == id));
         }
 
-        public void SetDeadline(int id, string date)
+        public void AddDeadline(int id, string date)
         {
             string[] dateSplitted = date.Split(".");
-            _tasks.First(x => x.Id == id).AddDeadline(new DateTime(int.Parse(dateSplitted[0]), 
-                int.Parse(dateSplitted[1]), int.Parse(dateSplitted[2])));
+            _tasks.First(x => x.Id == id).Deadline = new DateTime(int.Parse(dateSplitted[0]), 
+                int.Parse(dateSplitted[1]), int.Parse(dateSplitted[2]));
+        }
+        
+        public void Save(string filePath)
+        {
+            string json = JsonSerializer.Serialize(_tasks);
+            File.WriteAllText(filePath, json);
         }
 
-
-        public void Save(string fileName)
+        public void Load(string filePath)
         {
-            
+            var file = File.ReadAllText(filePath);
+            _tasks = JsonSerializer.Deserialize<List<Task>>(file);
         }
     }
 }
