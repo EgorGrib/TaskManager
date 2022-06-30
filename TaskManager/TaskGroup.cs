@@ -6,6 +6,7 @@ namespace TaskManager
     public class TaskGroup
     {
         private readonly int _id;
+        public int Id => _id;
         private readonly string _title;
         private List<Task> _tasks = new List<Task>();
 

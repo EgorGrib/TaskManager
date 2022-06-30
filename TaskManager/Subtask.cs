@@ -1,6 +1,6 @@
 namespace TaskManager
 {
-    public class SubTask
+    public class Subtask
     {
         private int _id;
         private string _information;
@@ -9,7 +9,7 @@ namespace TaskManager
         public int Id => _id;
         public string Info => _information;
 
-        public SubTask(int id, string information)
+        public Subtask(int id, string information)
         {
             _id = id;
             _information = information;

@@ -8,8 +8,8 @@ namespace TaskManager
         {
             Task task1 = new Task(1, "Do test task");
             task1.AddDeadline(new DateTime(2022, 7, 3));
-            task1.AddSubTask(1, "do thing 1");
-            task1.AddSubTask(2, "do thing 2");
+            task1.AddSubtask(1, "do thing 1");
+            task1.AddSubtask(2, "do thing 2");
             task1.MarkCompleted();
             //task1.Print();
             Task task2 = new Task(2, "Do tasdsafdfsf sdfsdfk");
