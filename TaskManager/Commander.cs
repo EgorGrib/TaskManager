@@ -75,14 +75,22 @@ namespace TaskManager
         public void AddDeadline(int id, string date)
         {
             string[] dateSplitted = date.Split(".");
-            _tasks.First(x => x.Id == id).Deadline = new DateTime(int.Parse(dateSplitted[0]), 
-                int.Parse(dateSplitted[1]), int.Parse(dateSplitted[2]));
+            _tasks.First(x => x.Id == id).Deadline = new DateTime(int.Parse(dateSplitted[2]), 
+                int.Parse(dateSplitted[1]), int.Parse(dateSplitted[0]));
         }
         
         public void Save(string filePath)
         {
-            string json = JsonSerializer.Serialize(_tasks);
-            File.WriteAllText(filePath, json);
+            if (_groups.Count == 0)
+            {
+                string json = JsonSerializer.Serialize(_tasks);
+                File.WriteAllText(filePath, json);
+            }
+            else
+            {
+                string json = JsonSerializer.Serialize(_groups);
+                File.WriteAllText(filePath, json);
+            }
         }
 
         public void Load(string filePath)

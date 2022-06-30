@@ -15,23 +15,8 @@ namespace TaskManager
             Title = title;
             Tasks = new List<Task>();
         }
-/*
-        public void AddToGroup(Task task)
-        {
-            Tasks.Add(task);
-        }
-
-        public void DeleteFromGroup(int id)
-        {
-            for (int i = 0; i < Tasks.Count; i++)
-            {
-                if (Tasks[i].Id == id)
-                {
-                    Tasks.RemoveAt(i);
-                }
-            }
-        }*/
-
+        
+        /*
         public void Print()
         {
             Console.WriteLine("Group: " + Title);
@@ -40,5 +25,6 @@ namespace TaskManager
                 t.Print();
             }
         }
+        */
     }
 }

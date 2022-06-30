@@ -19,6 +19,7 @@ namespace TaskManager
             Deadline = DateTime.MaxValue;
         }
 
+        /*
         public void Print()
         {
             var checkbox = IsCompleted ? "[x]" : "[ ]";
@@ -28,5 +29,6 @@ namespace TaskManager
                 Console.WriteLine($"\t[ ] {{{subTask.Id}}} {subTask.Description}");
             }
         }
+        */
     }
 }
