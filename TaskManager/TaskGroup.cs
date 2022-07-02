@@ -15,16 +15,5 @@ namespace TaskManager
             Title = title;
             Tasks = new List<Task>();
         }
-        
-        /*
-        public void Print()
-        {
-            Console.WriteLine("Group: " + Title);
-            foreach (var t in Tasks)
-            {
-                t.Print();
-            }
-        }
-        */
     }
 }

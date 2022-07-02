@@ -35,7 +35,7 @@ namespace TaskManager
                     
                     case "/complete":
                         var id = Convert.ToInt32(args);
-                        string isSub = _commander.IsSubtask(id);
+                        var isSub = _commander.IsSubtask(id);
                         if (isSub == "true")
                             _commander.CompleteSubtask(id);
                         else if (isSub == "false")
@@ -84,6 +84,10 @@ namespace TaskManager
                     
                     case "/exit":
                         _run = false;
+                        break;
+                    
+                    default:
+                        Console.WriteLine("Invalid command");
                         break;
                 }
             }

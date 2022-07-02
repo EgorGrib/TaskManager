@@ -54,18 +54,7 @@ namespace TaskManager
         public string IsSubtask(int id)
         {
             if (_tasks.Find(x => x.Id == id) != null) return "false";
-            foreach (var task in _tasks)
-            {
-                foreach (var subtask in task.Subtasks)
-                {
-                    if (subtask.Id == id)
-                    {
-                        return "true";
-                    }
-                }
-            }
-            return "not founded";
-
+            return _tasks.Any(task => task.Subtasks.Any(subtask => subtask.Id == id)) ? "true" : "not founded";
         }
 
         public void CreateGroup(string title)
