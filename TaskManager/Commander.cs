@@ -121,13 +121,13 @@ namespace TaskManager
             foreach (var task in _tasks)
             {
                 var checkbox = task.IsCompleted ? "[x]" : "[ ]";
-                Console.WriteLine($"{checkbox} ({task.Deadline:dd.MM.yyyy}) {{{task.Id}}} {task.Description}");
+                var date = task.Deadline == DateTime.MaxValue ? "" : $"{task.Deadline:dd.MM.yyyy}";
+                Console.WriteLine($"{checkbox} ({date}) {{{task.Id}}} {task.Description}");
                 foreach (var subTask in task.Subtasks)
                 {
                     checkbox = subTask.IsCompleted ? "[x]" : "[ ]";
                     Console.WriteLine($"\t{checkbox} {{{subTask.Id}}} {subTask.Description}");
                 }
-
             }
             Console.WriteLine();
         }
