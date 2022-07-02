@@ -4,8 +4,9 @@ namespace TaskManager
     static class Program
     { 
         
-        static void Main(string[] args)
+        static void Main()
         {
+            /*
             Commander commander = new Commander();
             commander.AddTask("something");
             commander.AddSubtask(1, "subtask 1");
@@ -19,7 +20,9 @@ namespace TaskManager
             commander.AddDeadline(4, "02.07.2022");
 
             commander.Save(@"D:\test.json");
-            
+            */
+            Parser parser = new Parser();
+            parser.Run();
         }
     }
 }

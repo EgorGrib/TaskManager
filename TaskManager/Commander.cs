@@ -51,6 +51,23 @@ namespace TaskManager
             _tasks.Select(x => x.Subtasks.First(y => y.Id == id)).First().IsCompleted = true;
         }
 
+        public string IsSubtask(int id)
+        {
+            if (_tasks.Find(x => x.Id == id) != null) return "false";
+            foreach (var task in _tasks)
+            {
+                foreach (var subtask in task.Subtasks)
+                {
+                    if (subtask.Id == id)
+                    {
+                        return "true";
+                    }
+                }
+            }
+            return "not founded";
+
+        }
+
         public void CreateGroup(string title)
         {
             _groups.Add(new TaskGroup(_groupId, title));
@@ -97,6 +114,22 @@ namespace TaskManager
         {
             var file = File.ReadAllText(filePath);
             _tasks = JsonSerializer.Deserialize<List<Task>>(file);
+        }
+
+        public void ShowAll()
+        {
+            foreach (var task in _tasks)
+            {
+                var checkbox = task.IsCompleted ? "[x]" : "[ ]";
+                Console.WriteLine($"{checkbox} ({task.Deadline:dd.MM.yyyy}) {{{task.Id}}} {task.Description}");
+                foreach (var subTask in task.Subtasks)
+                {
+                    checkbox = subTask.IsCompleted ? "[x]" : "[ ]";
+                    Console.WriteLine($"\t{checkbox} {{{subTask.Id}}} {subTask.Description}");
+                }
+
+            }
+            Console.WriteLine();
         }
     }
 }

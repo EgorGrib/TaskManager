@@ -7,7 +7,7 @@ namespace TaskManager
     {
         public int Id { get; }
         public string Title { get; }
-        public List<Task> Tasks { get; set; }
+        public List<Task> Tasks { get; }
 
         public TaskGroup(int id, string title)
         {
