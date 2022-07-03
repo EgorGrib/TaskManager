@@ -87,10 +87,10 @@ namespace TaskManager
                         break;
                     
                     case "/completed":
-                        //
+                        _commander.Completed();
                         break;
                     
-                    case "/all-groups":
+                    case "/groups":
                         _commander.ShowGroups();
                         break;
                     

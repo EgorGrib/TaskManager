@@ -123,6 +123,14 @@ namespace TaskManager
             return _groups.Any(x => x.Tasks.Contains(_tasks.First(y => y.Id == id)));
         }
 
+        public void Completed()
+        {
+            foreach (var task in _tasks.Where(task => task.IsCompleted))
+            {
+                ConsolePrinter.ShowTask(task);
+            }
+        }
+        
         public void Today()
         {
             foreach (var task in _tasks.Where(task => task.Deadline.Day == DateTime.Now.Day && 
