@@ -82,6 +82,18 @@ namespace TaskManager
                         _commander.ShowAll();
                         break;
                     
+                    case "/today":
+                        _commander.Today();
+                        break;
+                    
+                    case "/completed":
+                        //
+                        break;
+                    
+                    case "/all-groups":
+                        _commander.ShowGroups();
+                        break;
+                    
                     case "/exit":
                         _run = false;
                         break;

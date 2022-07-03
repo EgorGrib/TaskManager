@@ -65,7 +65,7 @@ namespace TaskManager
 
         public void DeleteGroup(int groupId)
         {
-            _groups.Remove(_groups.First(x => x.Id == _groupId));
+            _groups.Remove(_groups.First(x => x.Id == groupId));
         }
 
         public void AddToGroup(int groupId, int id)
@@ -87,38 +87,50 @@ namespace TaskManager
         
         public void Save(string filePath)
         {
-            if (_groups.Count == 0)
-            {
-                string json = JsonSerializer.Serialize(_tasks);
-                File.WriteAllText(filePath, json);
-            }
-            else
-            {
-                string json = JsonSerializer.Serialize(_groups);
-                File.WriteAllText(filePath, json);
-            }
+            string json = JsonSerializer.Serialize(_tasks);
+            File.WriteAllText(filePath, json);
         }
 
         public void Load(string filePath)
         {
-            var file = File.ReadAllText(filePath);
-            _tasks = JsonSerializer.Deserialize<List<Task>>(file);
+            var json = File.ReadAllText(filePath);
+            _tasks = JsonSerializer.Deserialize<List<Task>>(json);
         }
 
         public void ShowAll()
         {
-            foreach (var task in _tasks)
+            foreach (var group in _groups)
             {
-                var checkbox = task.IsCompleted ? "[x]" : "[ ]";
-                var date = task.Deadline == DateTime.MaxValue ? "" : $"{task.Deadline:dd.MM.yyyy}";
-                Console.WriteLine($"{checkbox} ({date}) {{{task.Id}}} {task.Description}");
-                foreach (var subTask in task.Subtasks)
-                {
-                    checkbox = subTask.IsCompleted ? "[x]" : "[ ]";
-                    Console.WriteLine($"\t{checkbox} {{{subTask.Id}}} {subTask.Description}");
-                }
+                ConsolePrinter.ShowGroup(group);
+            }
+            foreach (var task in _tasks.Select(x => x).Where(y => !HasGroup(y.Id)))
+            {
+                ConsolePrinter.ShowTask(task);
             }
             Console.WriteLine();
+        }
+
+        public void ShowGroups()
+        {
+            foreach (var group in _groups)
+            {
+                ConsolePrinter.ShowGroup(group);
+            }
+        }
+
+        private bool HasGroup(int id)
+        {
+            return _groups.Any(x => x.Tasks.Contains(_tasks.First(y => y.Id == id)));
+        }
+
+        public void Today()
+        {
+            foreach (var task in _tasks.Where(task => task.Deadline.Day == DateTime.Now.Day && 
+                                                      task.Deadline.Month == DateTime.Now.Month && 
+                                                      task.Deadline.Year == DateTime.Now.Year))
+            {
+                ConsolePrinter.ShowTask(task);
+            }
         }
     }
 }
