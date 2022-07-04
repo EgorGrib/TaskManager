@@ -25,6 +25,7 @@ namespace TaskManager
         {
             Task task = new Task(_id, taskTitle);
             _tasks.Add(task);
+            ConsolePrinter.TaskAdded(_id);
             _id++;
         }
 
@@ -33,22 +34,26 @@ namespace TaskManager
             Task task = _tasks.First(x => x.Id == id);
             Subtask subtask = new Subtask(_id, subtaskTitle);
             task.Subtasks.Add(subtask);
+            ConsolePrinter.TaskAdded(_id);
             _id++;
         }
 
         public void DeleteTask(int id)
         {
             _tasks.Remove(_tasks.First(x => x.Id == id));
+            ConsolePrinter.TaskDeleted();
         }
 
         public void CompleteTask(int id)
         {
             _tasks.First(x => x.Id == id).IsCompleted = true;
+            ConsolePrinter.TaskCompleted(id);
         }
 
         public void CompleteSubtask(int id)
         {
             _tasks.Select(x => x.Subtasks.First(y => y.Id == id)).First().IsCompleted = true;
+            ConsolePrinter.TaskCompleted(id);
         }
 
         public string IsSubtask(int id)
@@ -60,22 +65,26 @@ namespace TaskManager
         public void CreateGroup(string title)
         {
             _groups.Add(new TaskGroup(_groupId, title));
+            ConsolePrinter.GroupCreated(_groupId);
             _groupId++;
         }
 
         public void DeleteGroup(int groupId)
         {
             _groups.Remove(_groups.First(x => x.Id == groupId));
+            ConsolePrinter.GroupDeleted(groupId);
         }
 
         public void AddToGroup(int groupId, int id)
         {
             _groups.First(x => x.Id == groupId).Tasks.Add(_tasks.First(x => x.Id == id));
+            ConsolePrinter.AddedToGroup(id, _groups.First(x => x.Id == groupId).Title);
         }
 
         public void DeleteFromGroup(int groupId, int id)
         {
             _groups.First(x => x.Id == groupId).Tasks.Remove(_tasks.First(x => x.Id == id));
+            ConsolePrinter.DeletedFromGroup(id, _groups.First(x => x.Id == groupId).Title);
         }
 
         public void AddDeadline(int id, string date)
@@ -83,18 +92,21 @@ namespace TaskManager
             string[] dateSplitted = date.Split(".");
             _tasks.First(x => x.Id == id).Deadline = new DateTime(int.Parse(dateSplitted[2]), 
                 int.Parse(dateSplitted[1]), int.Parse(dateSplitted[0]));
+            ConsolePrinter.DeadlineSetted();
         }
         
         public void Save(string filePath)
         {
             string json = JsonSerializer.Serialize(_tasks);
             File.WriteAllText(filePath, json);
+            ConsolePrinter.TasksSaved();
         }
 
         public void Load(string filePath)
         {
             var json = File.ReadAllText(filePath);
             _tasks = JsonSerializer.Deserialize<List<Task>>(json);
+            ConsolePrinter.TasksLoaded();
         }
 
         public void ShowAll()
@@ -129,6 +141,7 @@ namespace TaskManager
             {
                 ConsolePrinter.ShowTask(task);
             }
+            Console.WriteLine();
         }
         
         public void Today()
@@ -139,6 +152,7 @@ namespace TaskManager
             {
                 ConsolePrinter.ShowTask(task);
             }
+            Console.WriteLine();
         }
     }
 }
